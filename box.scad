@@ -17,7 +17,7 @@ board_thickness = 0.056 * inch;
 
 // Soft dimensions
 
-box_wall_w = 10;
+box_wall_w = 8;
 handle_slot_w = 5;
 handle_slot_h = 5;
 first_slot_clearance = 10;
@@ -74,9 +74,9 @@ module quad_slots() {
             translate([i * board_unit, 0, 0])
             union() {
                 cube([slot_width, quad_slot_w, box_wall_h + 2]);   //Pih
-                     translate([first_slot_clearance+6, slot_depth+0.1, 186])
+                     translate([first_slot_clearance+6, 0, 186])
                     rotate([0,-90,-90])
-                        #steer();
+                        steer();
             }
        }
         
