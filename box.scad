@@ -68,6 +68,7 @@ difference() {
 }
 
 
+
 module quad_slots() {
     translate([first_slot_clearance, -slot_depth, -1]) {
         for(i = [0: number_of_quad_slots]) {
@@ -97,9 +98,7 @@ module steer() {
         polygon([[0,0],[steer_length,-4],[steer_length,4]]);    
 }
 
-
-    //smarting
-    
+       
     
     
     
