@@ -53,9 +53,6 @@ difference() {
 }
     
 
-
-
-
 // Long sides
 difference() {
     union() {
@@ -77,7 +74,7 @@ module quad_slots() {
                 cube([slot_width, quad_slot_w, box_wall_h + 2]);   //Pih
                      translate([first_slot_clearance+6, 0, 186])
                     rotate([0,-90,-90])
-                        steer();
+                        steer(quad_slot_w);
             }
        }
         
@@ -88,17 +85,23 @@ module hex_slots() {
     translate([-slot_depth, first_slot_clearance, -1]) {
         for(i = [0: number_of_hex_slots]) {
             translate([0, i * board_unit, 0] )
+            union() {
                 cube([hex_slot_w, slot_width, box_wall_h + 2]);
+                translate([first_slot_clearance-10, 0, 186])
+                 rotate([90,-90,90])
+                         steer(hex_slot_w);
+            }
         }
     }
 }
 
-module steer() {
-    linear_extrude(quad_slot_w)                              //+0.1 för att OS kräver det se rad 70
+module steer(x) {
+    linear_extrude(x)                            
         polygon([[0,0],[steer_length,-4],[steer_length,4]]);    
 }
 
-       
+
+      
     
     
     
