@@ -45,9 +45,9 @@ number_of_quad_slots = floor((box_inner_w - first_slot_clearance - board_unit) /
 difference() {
     union() {
         translate([-box_wall_w, -box_wall_w, 0])
-           # cube([box_wall_w,box_inner_d+2*box_wall_w,box_wall_h]);
-        translate([box_inner_w, -10, 0])
-            #cube([box_wall_w,box_inner_d+20, box_wall_h]);
+            cube([box_wall_w,box_inner_d+2*box_wall_w,box_wall_h]);
+        translate([box_inner_w, -box_wall_w, 0])
+            cube([box_wall_w,box_inner_d+2*box_wall_w, box_wall_h]);
     }
     hex_slots();
 }
