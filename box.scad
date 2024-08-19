@@ -17,7 +17,7 @@ board_thickness = 0.056 * inch;
 
 // Soft dimensions
 
-box_wall_w = 8;
+box_wall_w = 9;
 handle_slot_w = 5;
 handle_slot_h = 5;
 first_slot_clearance = 10;
@@ -26,6 +26,7 @@ slot_clearance = 0.25; // Extra wiggle room on each side of board
 board_h_clearance = 2; // From tallest component to next board
 
 steer_length = 30;      // instyrning av kortet
+bottom_h = 4;           //botten går in i lådan ger bra styrsel
 
 // calculated dimensions
 
@@ -45,10 +46,11 @@ number_of_quad_slots = floor((box_inner_w - first_slot_clearance - board_unit) /
 difference() {
     union() {
         translate([-box_wall_w, -box_wall_w, 0])
-            cube([box_wall_w,box_inner_d+2*box_wall_w,box_wall_h]);
+            cube([box_wall_w,box_inner_d+2*box_wall_w,box_wall_h+bottom_h]);     //Origo sida
         translate([box_inner_w, -box_wall_w, 0])
-            cube([box_wall_w,box_inner_d+2*box_wall_w, box_wall_h]);
+            cube([box_wall_w,box_inner_d+2*box_wall_w, box_wall_h+bottom_h]);    //Bortre sida
     }
+    translate([0,0,10])
     hex_slots();
 }
     
@@ -100,9 +102,18 @@ module steer(x) {
         polygon([[0,0],[steer_length,-4],[steer_length,4]]);    
 }
 
-
-      
+module bottom() {
+  translate([0,0,0])
+    union() {
+    cube([box_inner_w + 2* box_wall_w,box_inner_d+2*box_wall_w,box_wall_w]);  
     
+    translate([box_wall_w,box_wall_w,bottom_h])
+    cube([box_inner_w ,box_inner_d,box_wall_w]); 
+    }
+}
+
+translate([0,300,0])
+bottom();
     
     
     
